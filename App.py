@@ -39,6 +39,15 @@ with st.expander("Scraping Data Ulasan"):
     df.to_csv('ulasan_shopeepay.csv', index=False)
     st.write("Data berhasil disimpan.")
 
+    # Menambahkan tombol untuk mengunduh file CSV
+    with open(file_path, "rb") as f:
+        st.download_button(
+            label="Unduh Data Ulasan (CSV)",
+            data=f,
+            file_name="ulasan_shopeepay.csv",
+            mime="text/csv"
+        )
+
 # **2. Tampilan Data**
 with st.expander("Tampilan Data"):
     file_path = 'ulasan_shopeepay.csv'
