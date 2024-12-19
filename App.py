@@ -65,6 +65,39 @@ df['label'] = df['score'].apply(lambda x: 'positif' if x > 3 else 'negatif')
 df.to_csv('ulasan_shopeepay.csv', index=False)
 print("Data berhasil disimpan.")
 
+import streamlit as st
+import pandas as pd
+
+# Load data dari CSV
+file_path = 'ulasan_shopeepay.csv'
+df = pd.read_csv(file_path)
+
+# Judul aplikasi
+st.title("Tampilan Data Ulasan ShopeePay")
+
+# Tampilkan beberapa informasi
+st.subheader("10 Data Pertama")
+st.dataframe(df.head(10))  # Tampilkan 10 data pertama
+
+st.subheader("Informasi Data")
+st.text(df.info())  # Informasi tentang DataFrame
+
+st.subheader("Statistik Deskriptif")
+st.write(df.describe(include='all'))  # Statistik deskriptif
+
+# Pilihan untuk menampilkan semua data
+if st.checkbox("Tampilkan semua data"):
+    st.subheader("Seluruh Data")
+    st.dataframe(df)
+
+# Filter data berdasarkan skor rating
+st.subheader("Filter Berdasarkan Rating")
+rating_filter = st.slider("Pilih Skor Rating", min_value=int(df['score'].min()), max_value=int(df['score'].max()), value=int(df['score'].min()))
+filtered_data = df[df['score'] == rating_filter]
+st.write(f"Data dengan Skor Rating {rating_filter}:")
+st.dataframe(filtered_data)
+
+
 """# 2. Preprocessing Data"""
 
 import re
