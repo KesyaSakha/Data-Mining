@@ -84,6 +84,14 @@ buffer = io.StringIO()
 df.info(buf=buffer)
 info = buffer.getvalue()
 st.text(info)  # Tampilkan informasi tentang data
+# Menampilkan informasi dataframe dalam format terstruktur
+st.subheader("Informasi Data")
+st.write("Jumlah baris:", df.shape[0])
+st.write("Jumlah kolom:", df.shape[1])
+st.write("Nama kolom:", list(df.columns))
+st.write("Tipe data tiap kolom:")
+st.write(df.dtypes)
+
 
 st.subheader("Statistik Deskriptif")
 st.write(df.describe(include='all'))  # Statistik deskriptif
