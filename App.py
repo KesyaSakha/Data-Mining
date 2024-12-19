@@ -211,31 +211,27 @@ st.markdown(classification_report(y_test, y_pred_nb, target_names=['Negatif', 'P
 st.subheader("Classification Report SVM:")
 st.markdown(classification_report(y_test, y_pred_svm, target_names=['Negatif', 'Positif']))
 
-import matplotlib.pyplot as plt
+import streamlit as st
+import pandas as pd
 
-# Create a figure and a set of subplots
-fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+# Data untuk Naive Bayes
+data_nb = {'Sentimen': ['Positif', 'Negatif'],
+           'Jumlah Ulasan': [nb_positif, nb_negatif]}
+df_nb = pd.DataFrame(data_nb)
 
-# First subplot
-axes[0].bar(['Positif', 'Negatif'], [nb_positif, nb_negatif], color=['green', 'red'])
-axes[0].set_title('Sentimen Ulasan ShopeePay (Naive Bayes)')
-axes[0].set_xlabel('Sentimen')
-axes[0].set_ylabel('Jumlah Ulasan')
+# Data untuk SVM
+data_svm = {'Sentimen': ['Positif', 'Negatif'],
+            'Jumlah Ulasan': [svm_positif, svm_negatif]}
+df_svm = pd.DataFrame(data_svm)
 
-# Second subplot
-axes[1].bar(['Positif', 'Negatif'], [svm_positif, svm_negatif], color=['green', 'red'])
-axes[1].set_title('Sentimen Ulasan ShopeePay (SVM)')
-axes[1].set_xlabel('Sentimen')
-axes[1].set_ylabel('Jumlah Ulasan')
+# Menampilkan grafik batang untuk Naive Bayes
+st.subheader('Sentimen Ulasan ShopeePay (Naive Bayes)')
+st.bar_chart(df_nb.set_index('Sentimen'))
 
-# Adjust layout to prevent overlapping
-plt.tight_layout()
+# Menampilkan grafik batang untuk SVM
+st.subheader('Sentimen Ulasan ShopeePay (SVM)')
+st.bar_chart(df_svm.set_index('Sentimen'))
 
-# Display the plots
-plt.show()
-
-# Display the plots in Streamlit
-st.pyplot(fig)
 
 
 """# 4. Skenario Eksperimen
