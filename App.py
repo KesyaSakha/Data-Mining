@@ -67,7 +67,7 @@ print("Data berhasil disimpan.")
 
 import streamlit as st
 import pandas as pd
-
+import io
 # Load data dari CSV
 file_path = 'ulasan_shopeepay.csv'
 df = pd.read_csv(file_path)
