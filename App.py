@@ -158,7 +158,8 @@ with st.expander("Visualisasi Data"):
 
 st.write("Selesai.")
 
-with st.subheader("Skenario 1: Menggunakan TF-IDF dan Naive Bayes."):
+with st.expander("Skenario Eksperimen"):
+    st.subheader("Skenario 1: Menggunakan TF-IDF dan Naive Bayes.")
     st.subheader("Skenario 2: Menggunakan TF-IDF dan SVM")
     st.subheader("Skenario 3: Menggunakan Bag-of-Words dan Naive Bayes")
     st.subheader("Skenario 4: Menggunakan Bag-of-Words dan SVM")
