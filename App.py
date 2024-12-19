@@ -211,37 +211,31 @@ st.markdown(classification_report(y_test, y_pred_nb, target_names=['Negatif', 'P
 st.subheader("Classification Report SVM:")
 st.markdown(classification_report(y_test, y_pred_svm, target_names=['Negatif', 'Positif']))
 
-import streamlit as st
 import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.metrics import classification_report
 
-# Membuat subplots untuk Naive Bayes dan SVM
+# Create a figure and a set of subplots
 fig, axes = plt.subplots(1, 2, figsize=(12, 6))
 
-# Plot pertama untuk Naive Bayes
+# First subplot
 axes[0].bar(['Positif', 'Negatif'], [nb_positif, nb_negatif], color=['green', 'red'])
 axes[0].set_title('Sentimen Ulasan ShopeePay (Naive Bayes)')
 axes[0].set_xlabel('Sentimen')
 axes[0].set_ylabel('Jumlah Ulasan')
 
-# Plot kedua untuk SVM
-axes[1].bar(['Positif', 'Negatif'], [svm_positif, svm_negatif], color=['blue', 'orange'])
+# Second subplot
+axes[1].bar(['Positif', 'Negatif'], [svm_positif, svm_negatif], color=['green', 'red'])
 axes[1].set_title('Sentimen Ulasan ShopeePay (SVM)')
 axes[1].set_xlabel('Sentimen')
 axes[1].set_ylabel('Jumlah Ulasan')
 
-# Adjust layout untuk mencegah tumpang tindih
+# Adjust layout to prevent overlapping
 plt.tight_layout()
 
-# Menampilkan plot di Streamlit
+# Display the plots
+plt.show()
+
+# Display the plots in Streamlit
 st.pyplot(fig)
-
-# Evaluasi SVM dalam format teks
-st.subheader("Evaluasi SVM:")
-evaluation_svm = classification_report(y_test, y_pred_svm, target_names=le.classes_)
-st.text(evaluation_svm)
-
 
 
 """# 4. Skenario Eksperimen
