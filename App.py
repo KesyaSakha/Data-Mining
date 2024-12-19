@@ -96,6 +96,18 @@ st.write(df.describe(include='all'))  # Statistik deskriptif
 if st.checkbox("Tampilkan semua data"):
     st.subheader("Seluruh Data")
     st.dataframe(df)
+    
+# Menampilkan statistik deskriptif hanya untuk kolom numerik
+st.subheader("Statistik Deskriptif Numerik")
+st.write(df.describe())  # Hanya statistik untuk kolom numerik
+
+# Menampilkan jumlah label
+st.subheader("Distribusi Label")
+st.write(df['label'].value_counts())
+
+st.subheader("Statistik Deskriptif untuk Kolom Numerik dan Label")
+st.write(df[['score', 'label']].describe())  # Fokus pada kolom relevan
+
 
 # Filter data berdasarkan skor rating
 st.subheader("Filter Berdasarkan Rating")
