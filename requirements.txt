@@ -1,0 +1,6 @@
+google-play-scraper
+pandas
+scikit-learn
+matplotlib
+numpy
+streamlit
