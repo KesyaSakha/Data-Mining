@@ -9,7 +9,8 @@ Original file is located at
 # Contoh
 """
 
-# # Install google-play-scraper terlebih dahulu
+# Install google-play-scraper terlebih dahulu
+# Run this in your terminal or separate cell:
 # !pip install google-play-scraper
 
 # from google_play_scraper import Sort, reviews
@@ -36,12 +37,11 @@ Original file is located at
 # # Tampilkan tabel
 # print(df_reviews.head(10))  # Menampilkan 10 ulasan pertama
 
-pip install -r requirements.txt
-
 """# 1. Scraping Data Ulasan"""
 
 # Install google-play-scraper terlebih dahulu
-##!pip install google-play-scraper
+# Run this in your terminal or separate cell:
+# !pip install google-play-scraper
 
 # Import library
 from google_play_scraper import Sort, reviews
@@ -53,12 +53,10 @@ review, countinuation_token = reviews(
     lang='id',                # Bahasa Indonesia
     country='id',             # Negara Indonesia
     sort= Sort.MOST_RELEVANT,
-    count=1000,                # Jumlah ulasan
+    count=1000,               # Jumlah ulasan
 )
 
 # Konversi ke DataFrame
-pd.DataFrame(review)
-
 df = pd.DataFrame(review)
 df = df[['content', 'score']]  # Ambil kolom ulasan dan skor
 df['label'] = df['score'].apply(lambda x: 'positif' if x > 3 else 'negatif')
@@ -86,7 +84,7 @@ def clean_text(text):
     text = text.lower()                     # Konversi ke huruf kecil
     return text
 
-    df['clean_content'] = df['content'].apply(clean_text)
+df['clean_content'] = df['content'].apply(clean_text)
 
 # Encode label
 le = LabelEncoder()
@@ -94,16 +92,6 @@ df['label_encoded'] = le.fit_transform(df['label'])
 
 print(df.columns)
 print(df.head())
-import re
-
-def cleaning_function(text):
-    # Contoh cleaning sederhana: hapus angka, tanda baca, dan ubah ke huruf kecil
-    text = re.sub(r'\d+', '', text)  # Hapus angka
-    text = re.sub(r'[^\w\s]', '', text)  # Hapus tanda baca
-    text = text.lower()  # Ubah ke huruf kecil
-    return text
-
-df['clean_content'] = df['content'].apply(cleaning_function)
 
 # Split data
 X_train, X_test, y_train, y_test = train_test_split(
