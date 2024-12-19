@@ -310,6 +310,7 @@ disp_nb = ConfusionMatrixDisplay(confusion_matrix=cm_nb, display_labels=['Negati
 disp_nb.plot(cmap='Blues')
 plt.title('Confusion Matrix - Naive Bayes')
 plt.show()
+st.pyplot(plt)  # Use st.pyplot() to display the plot
 
 # Confusion matrix untuk SVM
 cm_svm = confusion_matrix(y_test, y_pred_svm)
@@ -317,6 +318,7 @@ disp_svm = ConfusionMatrixDisplay(confusion_matrix=cm_svm, display_labels=['Nega
 disp_svm.plot(cmap='Blues')
 plt.title('Confusion Matrix - SVM')
 plt.show()
+st.pyplot(plt)  # Use st.pyplot() to display the plot
 
 """**Confusion Matrix - Naive Bayes**
 * True Negatives (TN): 97 ulasan negatif terklasifikasi dengan benar.
@@ -365,6 +367,8 @@ ax.legend()
 
 plt.show()
 
+st.pyplot(fig)  # Display the plot using Streamlit
+
 """Visualisasi diatas menunjukkan perbandingan performa dua model klasifikasi, yaitu Naive Bayes (ditampilkan dalam warna biru) dan SVM (ditampilkan dalam warna oranye), berdasarkan tiga metrik evaluasi utama: Precision, Recall, dan F1-Score. Pada metrik Precision, SVM menunjukkan hasil yang lebih tinggi dibandingkan Naive Bayes, yang menunjukkan bahwa SVM lebih baik dalam meminimalkan prediksi positif palsu. Pada metrik Recall, kedua model memiliki performa yang hampir sama, menunjukkan kemampuan yang setara dalam mendeteksi data positif secara keseluruhan. Namun, pada metrik F1-Score, SVM kembali unggul dibandingkan Naive Bayes, menandakan keseimbangan yang lebih baik antara Precision dan Recall. Secara keseluruhan, grafik ini mengindikasikan bahwa model SVM memberikan performa yang lebih baik dibandingkan Naive Bayes dalam tugas klasifikasi ini."""
 
 import matplotlib.pyplot as plt
@@ -375,6 +379,7 @@ plt.title('Distribusi Skor Rating')
 plt.xlabel('Skor Rating')
 plt.ylabel('Jumlah Ulasan')
 plt.show()
+st.pyplot(plt)  # Display the plot using Streamlit
 
 """Visualisasi diatas menunjukkan distribusi jumlah ulasan berdasarkan skor rating. Pada sumbu horizontal (x-axis), ditampilkan skor rating (1 hingga 5), sedangkan pada sumbu vertikal (y-axis), ditampilkan jumlah ulasan untuk setiap skor.
 
