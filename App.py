@@ -146,6 +146,79 @@ X_train, X_test, y_train, y_test = train_test_split(
     df['clean_content'], df['label_encoded'], test_size=0.2, random_state=42
 )
 
+
+
+import streamlit as st
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.preprocessing import LabelEncoder
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+# Fungsi utama untuk memproses dan menampilkan hasil
+def main():
+    st.title("Aplikasi Klasifikasi Ulasan ShopeePay")
+
+    # Upload file CSV
+    uploaded_file = st.file_uploader("Pilih file CSV", type=["csv"])
+
+    if uploaded_file is not None:
+        # Baca file CSV
+        df = pd.read_csv(uploaded_file)
+
+        # Menampilkan data pertama
+        st.subheader("Data yang Diunggah")
+        st.write(df.head())
+
+        # Preprocessing data
+        if 'text' in df.columns and 'label' in df.columns:
+            df.dropna(subset=['text', 'label'], inplace=True)
+            df['text'] = df['text'].str.lower().str.replace(r'[^\w\s]', '', regex=True)
+
+            # Encode label
+            label_encoder = LabelEncoder()
+            df['label'] = label_encoder.fit_transform(df['label'])
+
+            # Pisahkan fitur dan target
+            X = df['text']
+            y = df['label']
+
+            # Bagi data
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+            # Transformasi teks dengan TF-IDF
+            tfidf_vectorizer = TfidfVectorizer(max_features=5000, stop_words='english')
+            X_train_tfidf = tfidf_vectorizer.fit_transform(X_train)
+            X_test_tfidf = tfidf_vectorizer.transform(X_test)
+
+            # Latih model menggunakan Logistic Regression
+            model = LogisticRegression()
+            model.fit(X_train_tfidf, y_train)
+
+            # Prediksi dan hitung akurasi
+            y_pred = model.predict(X_test_tfidf)
+            accuracy = accuracy_score(y_test, y_pred)
+
+            # Tampilkan hasil
+            st.subheader("Hasil Klasifikasi")
+            st.write(f"Akurasi Model: {accuracy * 100:.2f}%")
+
+            # Masukkan teks baru untuk prediksi
+            user_input = st.text_area("Masukkan Ulasan untuk Prediksi", "")
+            if user_input:
+                # Preprocessing input pengguna
+                user_input_tfidf = tfidf_vectorizer.transform([user_input])
+                pred = model.predict(user_input_tfidf)
+                pred_label = label_encoder.inverse_transform(pred)
+                st.write(f"Label Prediksi: {pred_label[0]}")
+        else:
+            st.error("Kolom 'text' atau 'label' tidak ditemukan dalam dataset!")
+
+if __name__ == "__main__":
+    main()
+
+
 """# 3. Feature Extraction dan Algoritma"""
 
 # TF-IDF
