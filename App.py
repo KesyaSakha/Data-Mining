@@ -105,10 +105,6 @@ st.write(df.describe())  # Hanya statistik untuk kolom numerik
 st.subheader("Distribusi Label")
 st.write(df['label'].value_counts())
 
-st.subheader("Statistik Deskriptif untuk Kolom Numerik dan Label")
-st.write(df[['score', 'label']].describe())  # Fokus pada kolom relevan
-
-
 # Filter data berdasarkan skor rating
 st.subheader("Filter Berdasarkan Rating")
 rating_filter = st.slider("Pilih Skor Rating", min_value=int(df['score'].min()), max_value=int(df['score'].max()), value=int(df['score'].min()))
