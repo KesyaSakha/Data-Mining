@@ -79,11 +79,7 @@ st.title("Tampilan Data Ulasan ShopeePay")
 st.subheader("10 Data Pertama")
 st.dataframe(df.head(10))  # Tampilkan 10 data pertama
 
-st.subheader("Informasi Data")
-buffer = io.StringIO()
-df.info(buf=buffer)
-info = buffer.getvalue()
-st.text(info)  # Tampilkan informasi tentang data
+
 # Menampilkan informasi dataframe dalam format terstruktur
 st.subheader("Informasi Data")
 st.write("Jumlah baris:", df.shape[0])
