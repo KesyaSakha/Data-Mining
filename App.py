@@ -16,6 +16,7 @@ from sklearn.svm import SVC
 from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
 from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
+import seaborn as sns
 import numpy as np
 import streamlit as st
 
@@ -61,8 +62,8 @@ with st.expander("Preprocessing Data"):
 
     st.write("Preprocessing selesai.")
 
-# **4. Feature Extraction dan Model**
-with st.expander("Feature Extraction dan Model"):
+# **4. Feature Extraction dan Algoritma**
+with st.expander("Feature Extraction dan Algoritma"):
     # TF-IDF
     vectorizer = TfidfVectorizer(max_features=500)
     X_train_tfidf = vectorizer.fit_transform(X_train)
@@ -79,6 +80,21 @@ with st.expander("Feature Extraction dan Model"):
     y_pred_svm = svm.predict(X_test_tfidf)
 
     st.write("Model berhasil dilatih.")
+
+
+    # Assuming 'df' is your DataFrame and 'y_pred_nb' and 'y_pred_svm' are your predictions
+    # Calculate the number of positive and negative reviews for each model
+    nb_positif = sum(y_pred_nb)
+    nb_negatif = len(y_pred_nb) - nb_positif
+    svm_positif = sum(y_pred_svm)
+    svm_negatif = len(y_pred_svm) - svm_positif
+
+    # Evaluasi
+    print("Evaluasi Naive Bayes:")
+    print(classification_report(y_test, y_pred_nb, target_names=le.classes_))
+
+    print("Evaluasi SVM:")
+    print(classification_report(y_test, y_pred_svm, target_names=le.classes_))
 
 # **5. Evaluasi Model**
 with st.expander("Evaluasi Model"):
