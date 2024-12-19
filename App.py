@@ -157,3 +157,8 @@ with st.expander("Visualisasi Data"):
     st.pyplot(fig)
 
 st.write("Selesai.")
+
+st.subheader("Skenario 1: Menggunakan TF-IDF dan Naive Bayes.")
+    st.subheader("Skenario 2: Menggunakan TF-IDF dan SVM")
+    st.subheader("Skenario 3: Menggunakan Bag-of-Words dan Naive Bayes")
+    st.subheader("Skenario 4: Menggunakan Bag-of-Words dan SVM")
