@@ -39,7 +39,13 @@ with st.expander("Scraping Data Ulasan"):
     df['label'] = df['score'].apply(lambda x: 'positif' if x > 3 else 'negatif')
     df.to_csv('ulasan_shopeepay.csv', index=False)
     st.write("Data berhasil disimpan.")
-
+    # Tambahkan tombol unduh untuk file CSV
+    st.download_button(
+        label="Unduh File CSV",
+        data=df.to_csv(index=False),
+        file_name='ulasan_shopeepay.csv',
+        mime='text/csv'
+    )
 
  
 # **3. Preprocessing Data**
