@@ -160,12 +160,9 @@ st.write("Selesai.")
 
 with st.expander("Skenario Eksperimen"):
     st.write("Skenario 1: Menggunakan TF-IDF dan Naive Bayes.
-
-Skenario 2: Menggunakan TF-IDF dan SVM.
-
-Skenario 3: Menggunakan Bag-of-Words dan Naive Bayes.
-
-Skenario 4: Menggunakan Bag-of-Words dan SVM.")
+    Skenario 2: Menggunakan TF-IDF dan SVM.
+    Skenario 3: Menggunakan Bag-of-Words dan Naive Bayes.
+    Skenario 4: Menggunakan Bag-of-Words dan SVM.")
     st.subheader("Persiapan Data")
     st.subheader("Skenario 1: Menggunakan TF-IDF dan Naive Bayes.")
     st.subheader("Skenario 2: Menggunakan TF-IDF dan SVM")
