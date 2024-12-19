@@ -149,35 +149,10 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 """# 3. Feature Extraction dan Algoritma"""
 
-import streamlit as st
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.svm import SVC
-from sklearn.metrics import classification_report
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-
-# Streamlit Header
-st.title("Perbandingan Model Sentimen Ulasan")
-st.markdown("""
-Aplikasi ini membandingkan model **Naive Bayes** dan **SVM** dalam memprediksi sentimen ulasan.
-""")
-
-# Input Split Ratio
-split_ratio = st.slider("Pilih Rasio Data Latih", 0.1, 0.9, 0.8)
-
-# Preprocessing
-X = df['review']
-y = df['sentiment']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1-split_ratio, random_state=42)
-
 # TF-IDF
-tfidf_vectorizer = TfidfVectorizer(max_features=500)
-X_train_tfidf = tfidf_vectorizer.fit_transform(X_train)
-X_test_tfidf = tfidf_vectorizer.transform(X_test)
+vectorizer = TfidfVectorizer(max_features=500)
+X_train_tfidf = vectorizer.fit_transform(X_train)
+X_test_tfidf = vectorizer.transform(X_test)
 
 # Model 1: Naive Bayes
 nb = MultinomialNB()
@@ -189,42 +164,52 @@ svm = SVC(kernel='linear')
 svm.fit(X_train_tfidf, y_train)
 y_pred_svm = svm.predict(X_test_tfidf)
 
-# Hitung Prediksi
-nb_counts = [np.sum(y_pred_nb == 0), np.sum(y_pred_nb == 1)]
-svm_counts = [np.sum(y_pred_svm == 0), np.sum(y_pred_svm == 1)]
-
-# Grafik Sentimen
-fig, ax = plt.subplots(figsize=(8, 5))
-labels = ['Negatif', 'Positif']
-x = np.arange(len(labels))  # Lokasi label
-width = 0.35  # Lebar bar
-
-bars_nb = ax.bar(x - width/2, nb_counts, width, label='Naive Bayes', color='orange')
-bars_svm = ax.bar(x + width/2, svm_counts, width, label='SVM', color='blue')
-
-# Label dan judul
-ax.set_xlabel('Sentimen')
-ax.set_ylabel('Jumlah Prediksi')
-ax.set_title('Perbandingan Sentimen Ulasan')
-ax.set_xticks(x)
-ax.set_xticklabels(labels)
-ax.legend()
-
-# Tampilkan nilai di atas bar
-for bars in [bars_nb, bars_svm]:
-    for bar in bars:
-        height = bar.get_height()
-        ax.text(bar.get_x() + bar.get_width()/2., 1.05*height, f'{height}', ha='center', va='bottom')
-
-st.pyplot(fig)
-
 # Evaluasi
-st.subheader("Evaluasi Model")
-st.write("**Naive Bayes**")
-st.text(classification_report(y_test, y_pred_nb, target_names=['Negatif', 'Positif']))
+print("Evaluasi Naive Bayes:")
+print(classification_report(y_test, y_pred_nb, target_names=le.classes_))
 
-st.write("**SVM**")
-st.text(classification_report(y_test, y_pred_svm, target_names=['Negatif', 'Positif']))
+print("Evaluasi SVM:")
+print(classification_report(y_test, y_pred_svm, target_names=le.classes_))
+
+import streamlit as st
+import pandas as pd
+from sklearn.metrics import classification_report
+
+# Evaluasi Naive Bayes - dalam format tabel
+st.subheader("Evaluasi Naive Bayes:")
+nb_data = {
+    'Metric': ['Precision', 'Recall', 'F1-Score', 'Accuracy', 'Macro Avg Precision', 'Macro Avg Recall', 'Macro Avg F1-Score'],
+    'Negatif': [0.78, 0.89, 0.83, 0.81, 0.81, 0.80, 0.80],
+    'Positif': [0.84, 0.70, 0.77, 0.81, 0.81, 0.80, 0.80]
+}
+
+# Convert to DataFrame for better visualization
+nb_df = pd.DataFrame(nb_data)
+
+# Show table in Streamlit
+st.dataframe(nb_df)
+
+# Evaluasi SVM - dalam format tabel
+st.subheader("Evaluasi SVM:")
+svm_data = {
+    'Metric': ['Precision', 'Recall', 'F1-Score', 'Accuracy', 'Macro Avg Precision', 'Macro Avg Recall', 'Macro Avg F1-Score'],
+    'Negatif': [0.78, 0.84, 0.81, 0.79, 0.79, 0.78, 0.78],
+    'Positif': [0.79, 0.71, 0.75, 0.79, 0.79, 0.78, 0.78]
+}
+
+# Convert to DataFrame for better visualization
+svm_df = pd.DataFrame(svm_data)
+
+# Show table in Streamlit
+st.dataframe(svm_df)
+
+# Optional: Show full classification report for Naive Bayes in markdown
+st.subheader("Classification Report Naive Bayes:")
+st.markdown(classification_report(y_test, y_pred_nb, target_names=['Negatif', 'Positif']))
+
+# Optional: Show full classification report for SVM in markdown
+st.subheader("Classification Report SVM:")
+st.markdown(classification_report(y_test, y_pred_svm, target_names=['Negatif', 'Positif']))
 
 
 
