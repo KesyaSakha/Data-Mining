@@ -273,7 +273,6 @@ Setiap skenario menghasilkan laporan klasifikasi lengkap dengan metrik precision
 - Naive Bayes: Algoritma probabilistik yang cepat dan efisien untuk teks.
 - SVM: Algoritma yang bekerja baik untuk data dengan dimensi tinggi seperti teks.
 
-Jika Anda ingin menyimpan hasil evaluasi atau menambahkan visualisasi, beri tahu saya! 😊
 
 # 5. Deployment dengan Streamlit
 """
