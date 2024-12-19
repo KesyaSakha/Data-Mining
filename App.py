@@ -172,43 +172,44 @@ print("Evaluasi SVM:")
 print(classification_report(y_test, y_pred_svm, target_names=le.classes_))
 
 import streamlit as st
+import pandas as pd
 from sklearn.metrics import classification_report
 
-# Evaluasi Naive Bayes
+# Evaluasi Naive Bayes - dalam format tabel
 st.subheader("Evaluasi Naive Bayes:")
-nb_report = """
-              precision    recall  f1-score   support
+nb_data = {
+    'Metric': ['Precision', 'Recall', 'F1-Score', 'Accuracy', 'Macro Avg Precision', 'Macro Avg Recall', 'Macro Avg F1-Score'],
+    'Negatif': [0.78, 0.89, 0.83, 0.81, 0.81, 0.80, 0.80],
+    'Positif': [0.84, 0.70, 0.77, 0.81, 0.81, 0.80, 0.80]
+}
 
-     negatif       0.78      0.89      0.83       109
-     positif       0.84      0.70      0.77        91
+# Convert to DataFrame for better visualization
+nb_df = pd.DataFrame(nb_data)
 
-    accuracy                           0.81       200
-   macro avg       0.81      0.80      0.80       200
-weighted avg       0.81      0.81      0.80       200
-"""
-st.text(nb_report)
+# Show table in Streamlit
+st.dataframe(nb_df)
 
-# Evaluasi SVM
+# Evaluasi SVM - dalam format tabel
 st.subheader("Evaluasi SVM:")
-svm_report = """
-              precision    recall  f1-score   support
+svm_data = {
+    'Metric': ['Precision', 'Recall', 'F1-Score', 'Accuracy', 'Macro Avg Precision', 'Macro Avg Recall', 'Macro Avg F1-Score'],
+    'Negatif': [0.78, 0.84, 0.81, 0.79, 0.79, 0.78, 0.78],
+    'Positif': [0.79, 0.71, 0.75, 0.79, 0.79, 0.78, 0.78]
+}
 
-     negatif       0.78      0.84      0.81       109
-     positif       0.79      0.71      0.75        91
+# Convert to DataFrame for better visualization
+svm_df = pd.DataFrame(svm_data)
 
-    accuracy                           0.79       200
-   macro avg       0.79      0.78      0.78       200
-weighted avg       0.79      0.79      0.78       200
-"""
-st.text(svm_report)
+# Show table in Streamlit
+st.dataframe(svm_df)
 
-# Optional: Show classification report using Streamlit's markdown or other formatting
-st.subheader("Classification Report Naive Bayes (Markdown Format):")
+# Optional: Show full classification report for Naive Bayes in markdown
+st.subheader("Classification Report Naive Bayes:")
 st.markdown(classification_report(y_test, y_pred_nb, target_names=['Negatif', 'Positif']))
 
-st.subheader("Classification Report SVM (Markdown Format):")
+# Optional: Show full classification report for SVM in markdown
+st.subheader("Classification Report SVM:")
 st.markdown(classification_report(y_test, y_pred_svm, target_names=['Negatif', 'Positif']))
-
 
 
 """# 4. Skenario Eksperimen
