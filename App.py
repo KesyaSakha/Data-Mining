@@ -105,6 +105,11 @@ st.write(df.describe())  # Hanya statistik untuk kolom numerik
 st.subheader("Distribusi Label")
 st.write(df['label'].value_counts())
 
+st.subheader("Statistik Deskriptif Konten (Panjang Teks)")
+df['content_length'] = df['content'].str.len()  # Hitung panjang teks
+st.write(df['content_length'].describe())
+
+
 # Filter data berdasarkan skor rating
 st.subheader("Filter Berdasarkan Rating")
 rating_filter = st.slider("Pilih Skor Rating", min_value=int(df['score'].min()), max_value=int(df['score'].max()), value=int(df['score'].min()))
