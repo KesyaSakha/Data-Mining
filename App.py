@@ -39,7 +39,6 @@ Original file is located at
 
 """# 1. Scraping Data Ulasan"""
 
-hahahaha
 
 # Install google-play-scraper terlebih dahulu
 # Run this in your terminal or separate cell:
