@@ -387,8 +387,6 @@ Skor rating 5 juga memiliki jumlah ulasan yang sangat tinggi, mendekati 400 ulas
 Visualisasi ini mengindikasikan bahwa ulasan pada dataset cenderung terpolarisasi, dengan sebagian besar ulasan berada di skor ekstrem (1 atau 5).
 """
 
-from google.colab import files
-
 # Ekspor data ke file CSV
 df.to_csv('ulasan_shopeepay.csv', index=False)
 print("File CSV berhasil disimpan.")
