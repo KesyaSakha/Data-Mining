@@ -238,8 +238,6 @@ Jika Anda ingin menyimpan hasil evaluasi atau menambahkan visualisasi, beri tahu
 # 5. Deployment dengan Streamlit
 """
 
-!pip install streamlit
-
 import streamlit as st
 import pandas as pd
 import re
