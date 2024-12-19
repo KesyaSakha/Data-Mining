@@ -36,10 +36,12 @@ Original file is located at
 # # Tampilkan tabel
 # print(df_reviews.head(10))  # Menampilkan 10 ulasan pertama
 
+pip install -r requirements.txt
+
 """# 1. Scraping Data Ulasan"""
 
 # Install google-play-scraper terlebih dahulu
-!pip install google-play-scraper
+##!pip install google-play-scraper
 
 # Import library
 from google_play_scraper import Sort, reviews
