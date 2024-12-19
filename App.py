@@ -171,58 +171,44 @@ print(classification_report(y_test, y_pred_nb, target_names=le.classes_))
 print("Evaluasi SVM:")
 print(classification_report(y_test, y_pred_svm, target_names=le.classes_))
 
-import matplotlib.pyplot as plt
-import numpy as np
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
+import streamlit as st
+from sklearn.metrics import classification_report
 
-# Confusion Matrix for Naive Bayes
-cm_nb = confusion_matrix(y_test, y_pred_nb)
-disp_nb = ConfusionMatrixDisplay(confusion_matrix=cm_nb, display_labels=['Negatif', 'Positif'])
-disp_nb.plot(cmap='Blues')
-plt.title('Confusion Matrix - Naive Bayes')
-plt.show()
-st.pyplot(plt)
+# Evaluasi Naive Bayes
+st.subheader("Evaluasi Naive Bayes:")
+nb_report = """
+              precision    recall  f1-score   support
 
-# Confusion Matrix for SVM
-cm_svm = confusion_matrix(y_test, y_pred_svm)
-disp_svm = ConfusionMatrixDisplay(confusion_matrix=cm_svm, display_labels=['Negatif', 'Positif'])
-disp_svm.plot(cmap='Blues')
-plt.title('Confusion Matrix - SVM')
-plt.show()
-st.pyplot(plt)
+     negatif       0.78      0.89      0.83       109
+     positif       0.84      0.70      0.77        91
 
-# Comparing Model Performance (Precision, Recall, F1-Score)
-metrics = ['Precision', 'Recall', 'F1-Score']
-# Scores for Naive Bayes based on your provided evaluation
-nb_scores = [0.78, 0.89, 0.83]  # Precision, Recall, F1 for Naive Bayes
-# Scores for SVM based on your provided evaluation
-svm_scores = [0.78, 0.84, 0.81]  # Precision, Recall, F1 for SVM
+    accuracy                           0.81       200
+   macro avg       0.81      0.80      0.80       200
+weighted avg       0.81      0.81      0.80       200
+"""
+st.text(nb_report)
 
-x = np.arange(len(metrics))
-width = 0.35
+# Evaluasi SVM
+st.subheader("Evaluasi SVM:")
+svm_report = """
+              precision    recall  f1-score   support
 
-# Plotting the performance comparison
-fig, ax = plt.subplots()
-rects1 = ax.bar(x - width/2, nb_scores, width, label='Naive Bayes')
-rects2 = ax.bar(x + width/2, svm_scores, width, label='SVM')
+     negatif       0.78      0.84      0.81       109
+     positif       0.79      0.71      0.75        91
 
-ax.set_xlabel('Metrics')
-ax.set_ylabel('Scores')
-ax.set_title('Model Performance Comparison')
-ax.set_xticks(x)
-ax.set_xticklabels(metrics)
-ax.legend()
+    accuracy                           0.79       200
+   macro avg       0.79      0.78      0.78       200
+weighted avg       0.79      0.79      0.78       200
+"""
+st.text(svm_report)
 
-plt.show()
-st.pyplot(fig)  # Display the plot using Streamlit
+# Optional: Show classification report using Streamlit's markdown or other formatting
+st.subheader("Classification Report Naive Bayes (Markdown Format):")
+st.markdown(classification_report(y_test, y_pred_nb, target_names=['Negatif', 'Positif']))
 
-# Visualizing the distribution of ratings
-df['score'].value_counts().sort_index().plot(kind='bar', color=['red', 'orange', 'yellow', 'green', 'blue'])
-plt.title('Distribusi Skor Rating')
-plt.xlabel('Skor Rating')
-plt.ylabel('Jumlah Ulasan')
-plt.show()
-st.pyplot(plt)  # Display the plot using Streamlit
+st.subheader("Classification Report SVM (Markdown Format):")
+st.markdown(classification_report(y_test, y_pred_svm, target_names=['Negatif', 'Positif']))
+
 
 
 """# 4. Skenario Eksperimen
