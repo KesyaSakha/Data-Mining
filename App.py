@@ -171,6 +171,60 @@ print(classification_report(y_test, y_pred_nb, target_names=le.classes_))
 print("Evaluasi SVM:")
 print(classification_report(y_test, y_pred_svm, target_names=le.classes_))
 
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
+
+# Confusion Matrix for Naive Bayes
+cm_nb = confusion_matrix(y_test, y_pred_nb)
+disp_nb = ConfusionMatrixDisplay(confusion_matrix=cm_nb, display_labels=['Negatif', 'Positif'])
+disp_nb.plot(cmap='Blues')
+plt.title('Confusion Matrix - Naive Bayes')
+plt.show()
+st.pyplot(plt)
+
+# Confusion Matrix for SVM
+cm_svm = confusion_matrix(y_test, y_pred_svm)
+disp_svm = ConfusionMatrixDisplay(confusion_matrix=cm_svm, display_labels=['Negatif', 'Positif'])
+disp_svm.plot(cmap='Blues')
+plt.title('Confusion Matrix - SVM')
+plt.show()
+st.pyplot(plt)
+
+# Comparing Model Performance (Precision, Recall, F1-Score)
+metrics = ['Precision', 'Recall', 'F1-Score']
+# Scores for Naive Bayes based on your provided evaluation
+nb_scores = [0.78, 0.89, 0.83]  # Precision, Recall, F1 for Naive Bayes
+# Scores for SVM based on your provided evaluation
+svm_scores = [0.78, 0.84, 0.81]  # Precision, Recall, F1 for SVM
+
+x = np.arange(len(metrics))
+width = 0.35
+
+# Plotting the performance comparison
+fig, ax = plt.subplots()
+rects1 = ax.bar(x - width/2, nb_scores, width, label='Naive Bayes')
+rects2 = ax.bar(x + width/2, svm_scores, width, label='SVM')
+
+ax.set_xlabel('Metrics')
+ax.set_ylabel('Scores')
+ax.set_title('Model Performance Comparison')
+ax.set_xticks(x)
+ax.set_xticklabels(metrics)
+ax.legend()
+
+plt.show()
+st.pyplot(fig)  # Display the plot using Streamlit
+
+# Visualizing the distribution of ratings
+df['score'].value_counts().sort_index().plot(kind='bar', color=['red', 'orange', 'yellow', 'green', 'blue'])
+plt.title('Distribusi Skor Rating')
+plt.xlabel('Skor Rating')
+plt.ylabel('Jumlah Ulasan')
+plt.show()
+st.pyplot(plt)  # Display the plot using Streamlit
+
+
 """# 4. Skenario Eksperimen
 
 Skenario 1: Menggunakan TF-IDF dan Naive Bayes.
