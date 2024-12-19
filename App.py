@@ -386,10 +386,3 @@ Skor rating 4 memiliki jumlah ulasan yang lebih sedikit dibanding skor 2 dan 3.
 Skor rating 5 juga memiliki jumlah ulasan yang sangat tinggi, mendekati 400 ulasan, menunjukkan dominasi ulasan sangat positif.
 Visualisasi ini mengindikasikan bahwa ulasan pada dataset cenderung terpolarisasi, dengan sebagian besar ulasan berada di skor ekstrem (1 atau 5).
 """
-
-# Ekspor data ke file CSV
-df.to_csv('ulasan_shopeepay.csv', index=False)
-print("File CSV berhasil disimpan.")
-
-# Unduh file
-files.download('ulasan_shopeepay.csv')
