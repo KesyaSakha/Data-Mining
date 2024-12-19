@@ -222,7 +222,6 @@ Skenario 3: Menggunakan Bag-of-Words dan Naive Bayes.
 
 Skenario 4: Menggunakan Bag-of-Words dan SVM.
 
-## Persiapan Data
 """
 
 import pandas as pd
