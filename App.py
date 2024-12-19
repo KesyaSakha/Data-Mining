@@ -40,8 +40,9 @@ with st.expander("Scraping Data Ulasan"):
     st.write("Data berhasil disimpan.")
 
 
+ 
     # Menambahkan tombol untuk mengunduh file CSV
-    with open(file_path, "rb") as f:
+    with open(file_path, "r") as f:  # Menggunakan mode 'r' untuk membuka file CSV
         st.download_button(
             label="Unduh Data Ulasan (CSV)",
             data=f,
@@ -61,30 +62,6 @@ try:
 
 except Exception as e:
     st.error(f"Terjadi kesalahan saat mengunduh file: {e}")
-
-
-# **2. Tampilan Data**
-with st.expander("Tampilan Data"):
-    file_path = 'ulasan_shopeepay.csv'
-    df = pd.read_csv(file_path)
-
-    st.subheader("10 Data Pertama")
-    st.dataframe(df.head(10))
-
-    st.subheader("Informasi Data")
-    st.write("Jumlah baris:", df.shape[0])
-    st.write("Jumlah kolom:", df.shape[1])
-    st.write("Nama kolom:", list(df.columns))
-    st.write("Tipe data tiap kolom:")
-    st.write(df.dtypes)
-
-    if st.checkbox("Tampilkan semua data"):
-        st.subheader("Seluruh Data")
-        st.dataframe(df)
-
-    st.subheader("Distribusi Label")
-    st.write(df['label'].value_counts())
-
 # **3. Preprocessing Data**
 with st.expander("Preprocessing Data"):
     def clean_text(text):
