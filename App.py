@@ -262,7 +262,6 @@ y = df['label_encoded']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 print("Data berhasil di-split.")
 
-pip install scikit-learn
 
 # TF-IDF Feature Extraction
 vectorizer = TfidfVectorizer(max_features=500)
