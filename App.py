@@ -39,6 +39,7 @@ with st.expander("Scraping Data Ulasan"):
     df.to_csv('ulasan_shopeepay.csv', index=False)
     st.write("Data berhasil disimpan.")
 
+
     # Menambahkan tombol untuk mengunduh file CSV
     with open(file_path, "rb") as f:
         st.download_button(
@@ -47,6 +48,20 @@ with st.expander("Scraping Data Ulasan"):
             file_name="ulasan_shopeepay.csv",
             mime="text/csv"
         )
+
+# **2. Mengunduh File CSV dari GitHub**
+st.subheader("Unduh File CSV dari GitHub")
+file_url = "https://raw.githubusercontent.com/KesyaSakha/Data-Mining/main/ulasan_shopeepay.csv"  # Ganti dengan URL raw GitHub yang benar
+
+# Membaca file CSV dari URL GitHub
+try:
+    df_github = pd.read_csv(file_url)
+    st.write("Data berhasil diunduh dari GitHub.")
+    st.dataframe(df_github.head(10))  # Menampilkan 10 data pertama
+
+except Exception as e:
+    st.error(f"Terjadi kesalahan saat mengunduh file: {e}")
+
 
 # **2. Tampilan Data**
 with st.expander("Tampilan Data"):
