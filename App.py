@@ -80,7 +80,10 @@ st.subheader("10 Data Pertama")
 st.dataframe(df.head(10))  # Tampilkan 10 data pertama
 
 st.subheader("Informasi Data")
-st.text(df.info())  # Informasi tentang DataFrame
+buffer = io.StringIO()
+df.info(buf=buffer)
+info = buffer.getvalue()
+st.text(info)  # Tampilkan informasi tentang data
 
 st.subheader("Statistik Deskriptif")
 st.write(df.describe(include='all'))  # Statistik deskriptif
