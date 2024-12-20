@@ -118,7 +118,7 @@ with st.expander("Skenario Eksperimen"):
     # Evaluasi
     print("Skenario 1: TF-IDF + Naive Bayes")
     print(classification_report(y_test, y_pred_nb_tfidf, target_names=le.classes_))
-    st.write("Selesai.")
+    st.write("Berhasil.")
     
     st.subheader("Skenario 2: Menggunakan TF-IDF dan SVM")
     # SVM
