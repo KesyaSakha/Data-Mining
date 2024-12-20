@@ -270,5 +270,22 @@ with st.expander("Visualisasi Data"):
     ax.legend()
 
     st.pyplot(fig)
+st.markdown("""
+    **Perbandingan Visualisasi Performa Model:**
+    X-Axis (Sumbu X): Menunjukkan metrik evaluasi:
 
+Precision: Keakuratan prediksi positif.
+Recall: Kemampuan mendeteksi ulasan positif.
+F1-Score: Kombinasi dari Precision dan Recall.
+Y-Axis (Sumbu Y): Menunjukkan nilai skor (0.0 - 1.0).
+
+Bar Chart:
+
+Setiap skenario direpresentasikan oleh satu bar pada setiap metrik.
+Warna atau posisi bar sesuai dengan skenario (Skenario 1, Skenario 2, dst.).
+Interpretasi:
+
+Bandingkan tinggi bar pada setiap metrik untuk melihat performa model.
+Model terbaik memiliki bar paling tinggi pada Precision, Recall, dan F1-Score.
+    """)
 # st.write("Selesai.")
