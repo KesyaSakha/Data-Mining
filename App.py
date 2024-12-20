@@ -288,9 +288,12 @@ with st.expander("Visualisasi Data"):
         3. Bar Chart:
         - Setiap skenario direpresentasikan oleh satu bar pada setiap metrik.
         - Warna atau posisi bar sesuai dengan skenario (Skenario 1, Skenario 2, dst.).
-        4. Interpretasi:
-        - Bandingkan tinggi bar pada setiap metrik untuk melihat performa model.
-        - Model terbaik memiliki bar paling tinggi pada Precision, Recall, dan F1-Score.
+        4. Analisis Perbadingan:
+        - Untuk setiap metrik (Precision, Recall, F1-Score), lihat bar mana yang paling tinggi.
+        - Precision: Skenario 1 (TF-IDF + Naive Bayes) memiliki skor Precision tertinggi.
+        - Recall: Semua model memiliki performa yang mirip, tetapi Skenario 2 (TF-IDF + SVM) sedikit unggul.
+        - F1-Score: Nilai F1-Score konsisten dengan Recall; TF-IDF + SVM sedikit unggul.
+
         """)
     
     st.markdown("""
