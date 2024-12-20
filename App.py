@@ -286,12 +286,10 @@ st.markdown("""
     """)
 
 st.markdown("""
-    **Output :**
+    **Output:**
     1. Skenario 1: TF-IDF + Naive Bayes → Akurasi dan evaluasi performa ditampilkan.
     2. Skenario 2: TF-IDF + SVM → Akurasi dan evaluasi performa ditampilkan.
     3. Skenario 3: Bag-of-Words + Naive Bayes → Akurasi dan evaluasi performa ditampilkan.
     4. Skenario 4: Bag-of-Words + SVM → Akurasi dan evaluasi performa ditampilkan.
-
-Setiap skenario menghasilkan laporan klasifikasi lengkap dengan metrik precision, recall, f1-score, dan akurasi.
     """)
 # st.write("Selesai.")
