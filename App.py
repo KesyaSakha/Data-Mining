@@ -284,4 +284,14 @@ st.markdown("""
     - Bandingkan tinggi bar pada setiap metrik untuk melihat performa model.
     - Model terbaik memiliki bar paling tinggi pada Precision, Recall, dan F1-Score.
     """)
+
+st.markdown("""
+    **Output :**
+    - Skenario 1: TF-IDF + Naive Bayes → Akurasi dan evaluasi performa ditampilkan.
+    - Skenario 2: TF-IDF + SVM → Akurasi dan evaluasi performa ditampilkan.
+    - Skenario 3: Bag-of-Words + Naive Bayes → Akurasi dan evaluasi performa ditampilkan.
+    - Skenario 4: Bag-of-Words + SVM → Akurasi dan evaluasi performa ditampilkan.
+
+Setiap skenario menghasilkan laporan klasifikasi lengkap dengan metrik precision, recall, f1-score, dan akurasi.
+    """)
 # st.write("Selesai.")
