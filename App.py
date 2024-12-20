@@ -120,20 +120,35 @@ with st.expander("Skenario Eksperimen"):
     print(classification_report(y_test, y_pred_nb_tfidf, target_names=le.classes_))
     
     st.subheader("Skenario 2: Menggunakan TF-IDF dan SVM")
-    # Naive Bayes
-    nb = MultinomialNB()
-    nb.fit(X_train_tfidf, y_train)
-    y_pred_nb_tfidf = nb.predict(X_test_tfidf)
+    # SVM
+    svm = SVC(kernel='linear')
+    svm.fit(X_train_tfidf, y_train)
+    y_pred_svm_tfidf = svm.predict(X_test_tfidf)
     # Evaluasi
-    print("Skenario 1: TF-IDF + Naive Bayes")
-    print(classification_report(y_test, y_pred_nb_tfidf, target_names=le.classes_))
+    print("Skenario 2: TF-IDF + SVM")
+    print(classification_report(y_test, y_pred_svm_tfidf, target_names=le.classes_))
 
-    # Hasil evaluasi SVM
-    report_svm = classification_report(y_test, y_pred_svm, target_names=['negatif', 'positif'], output_dict=True)
-    df_svm = pd.DataFrame(report_svm).transpose()
+    st.subheader("Skenario 3: Menggunakan Bag-of-Words dan Naive Bayes")
+    # Bag-of-Words
+    bow_vectorizer = CountVectorizer(max_features=500)
+    X_train_bow = bow_vectorizer.fit_transform(X_train)
+    X_test_bow = bow_vectorizer.transform(X_test)
+    # Naive Bayes
+    nb_bow = MultinomialNB()
+    nb_bow.fit(X_train_bow, y_train)
+    y_pred_nb_bow = nb_bow.predict(X_test_bow)
+    # Evaluasi
+    print("Skenario 3: Bag-of-Words + Naive Bayes")
+    print(classification_report(y_test, y_pred_nb_bow, target_names=le.classes_))
 
-    st.subheader("Evaluasi SVM")
-    st.dataframe(df_svm)
+    st.subheader("Skenario 4: Menggunakan Bag-of-Words dan SVM")
+     # SVM
+    svm_bow = SVC(kernel='linear')
+    svm_bow.fit(X_train_bow, y_train)
+    y_pred_svm_bow = svm_bow.predict(X_test_bow)
+    # Evaluasi
+    print("Skenario 4: Bag-of-Words + SVM")
+    print(classification_report(y_test, y_pred_svm_bow, target_names=le.classes_))
     
 # **5. Evaluasi Model**
 with st.expander("Evaluasi Model"):
