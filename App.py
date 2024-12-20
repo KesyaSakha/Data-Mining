@@ -111,48 +111,89 @@ with st.expander("Skenario Eksperimen"):
     # Skenario 4: Menggunakan Bag-of-Words dan SVM
     
     st.subheader("Skenario 1: Menggunakan TF-IDF dan Naive Bayes.")
-    # Naive Bayes
     nb = MultinomialNB()
     nb.fit(X_train_tfidf, y_train)
     y_pred_nb_tfidf = nb.predict(X_test_tfidf)
-    # Evaluasi
-    print("Skenario 1: TF-IDF + Naive Bayes")
-    print(classification_report(y_test, y_pred_nb_tfidf, target_names=le.classes_))
-    st.write("Berhasil.")
-    
+    report_nb_tfidf = classification_report(y_test, y_pred_nb_tfidf, target_names=le.classes_, output_dict=True)
+    df_nb_tfidf = pd.DataFrame(report_nb_tfidf).transpose()
+    st.write("Hasil Evaluasi:")
+    st.dataframe(df_nb_tfidf)
+
     st.subheader("Skenario 2: Menggunakan TF-IDF dan SVM")
-    # SVM
     svm = SVC(kernel='linear')
     svm.fit(X_train_tfidf, y_train)
     y_pred_svm_tfidf = svm.predict(X_test_tfidf)
-    # Evaluasi
-    print("Skenario 2: TF-IDF + SVM")
-    print(classification_report(y_test, y_pred_svm_tfidf, target_names=le.classes_))
-    st.write("Berhasil.")
+    report_svm_tfidf = classification_report(y_test, y_pred_svm_tfidf, target_names=le.classes_, output_dict=True)
+    df_svm_tfidf = pd.DataFrame(report_svm_tfidf).transpose()
+    st.write("Hasil Evaluasi:")
+    st.dataframe(df_svm_tfidf)
 
     st.subheader("Skenario 3: Menggunakan Bag-of-Words dan Naive Bayes")
-    # Bag-of-Words
     bow_vectorizer = CountVectorizer(max_features=500)
     X_train_bow = bow_vectorizer.fit_transform(X_train)
     X_test_bow = bow_vectorizer.transform(X_test)
-    # Naive Bayes
     nb_bow = MultinomialNB()
     nb_bow.fit(X_train_bow, y_train)
     y_pred_nb_bow = nb_bow.predict(X_test_bow)
-    # Evaluasi
-    print("Skenario 3: Bag-of-Words + Naive Bayes")
-    print(classification_report(y_test, y_pred_nb_bow, target_names=le.classes_))
-    st.write("Berhasil.")
+    report_nb_bow = classification_report(y_test, y_pred_nb_bow, target_names=le.classes_, output_dict=True)
+    df_nb_bow = pd.DataFrame(report_nb_bow).transpose()
+    st.write("Hasil Evaluasi:")
+    st.dataframe(df_nb_bow)
 
     st.subheader("Skenario 4: Menggunakan Bag-of-Words dan SVM")
-     # SVM
     svm_bow = SVC(kernel='linear')
     svm_bow.fit(X_train_bow, y_train)
     y_pred_svm_bow = svm_bow.predict(X_test_bow)
-    # Evaluasi
-    print("Skenario 4: Bag-of-Words + SVM")
-    print(classification_report(y_test, y_pred_svm_bow, target_names=le.classes_))
-    st.write("Berhasil.")
+    report_svm_bow = classification_report(y_test, y_pred_svm_bow, target_names=le.classes_, output_dict=True)
+    df_svm_bow = pd.DataFrame(report_svm_bow).transpose()
+    st.write("Hasil Evaluasi:")
+    st.dataframe(df_svm_bow)
+
+# hasil
+# Visualisasi perbandingan hasil
+    st.subheader("Perbandingan Performa Model")
+    metrics = ['Precision', 'Recall', 'F1-Score']
+    
+    # Data dari semua skenario
+    skenario_scores = {
+        "Skenario 1 (TF-IDF + Naive Bayes)": [
+            df_nb_tfidf.loc['positif', 'precision'],
+            df_nb_tfidf.loc['positif', 'recall'],
+            df_nb_tfidf.loc['positif', 'f1-score']
+        ],
+        "Skenario 2 (TF-IDF + SVM)": [
+            df_svm_tfidf.loc['positif', 'precision'],
+            df_svm_tfidf.loc['positif', 'recall'],
+            df_svm_tfidf.loc['positif', 'f1-score']
+        ],
+        "Skenario 3 (Bag-of-Words + Naive Bayes)": [
+            df_nb_bow.loc['positif', 'precision'],
+            df_nb_bow.loc['positif', 'recall'],
+            df_nb_bow.loc['positif', 'f1-score']
+        ],
+        "Skenario 4 (Bag-of-Words + SVM)": [
+            df_svm_bow.loc['positif', 'precision'],
+            df_svm_bow.loc['positif', 'recall'],
+            df_svm_bow.loc['positif', 'f1-score']
+        ],
+    }
+
+    # Plot perbandingan
+    x = np.arange(len(metrics))
+    width = 0.2
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    for i, (skenario, scores) in enumerate(skenario_scores.items()):
+        ax.bar(x + i * width, scores, width, label=skenario)
+
+    ax.set_xlabel('Metrics')
+    ax.set_ylabel('Scores')
+    ax.set_title('Perbandingan Performa Model (Positif)')
+    ax.set_xticks(x + width / 2)
+    ax.set_xticklabels(metrics)
+    ax.legend()
+
+    st.pyplot(fig)
     
 # **5. Evaluasi Model**
 with st.expander("Evaluasi Model"):
