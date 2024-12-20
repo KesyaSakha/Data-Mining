@@ -48,7 +48,7 @@ with st.expander("Scraping Data Ulasan"):
     )
 
  
-# **3. Preprocessing Data**
+# **2. Preprocessing Data**
 with st.expander("Preprocessing Data"):
     def clean_text(text):
         text = re.sub(r'[^a-zA-Z\s]', '', text)  # Hapus karakter selain huruf
@@ -68,7 +68,7 @@ with st.expander("Preprocessing Data"):
 
     st.write("Preprocessing selesai.")
 
-# **4. Feature Extraction dan Algoritma**
+# **3. Feature Extraction dan Algoritma**
 with st.expander("Feature Extraction dan Algoritma"):
     # TF-IDF
     vectorizer = TfidfVectorizer(max_features=500)
@@ -102,6 +102,39 @@ with st.expander("Feature Extraction dan Algoritma"):
     print("Evaluasi SVM:")
     print(classification_report(y_test, y_pred_svm, target_names=le.classes_))
 
+# **4. Skenario Eksperimen**
+with st.expander("Skenario Eksperimen"):
+    # 4 Skenario
+    # Skenario 1: TF-IDF dan Naive Bayes
+    # Skenario 2: Menggunakan TD-IDF dan SVM
+    # Skenario 3: Menggunakan Bag-of-Words dan Naive Bayes.
+    # Skenario 4: Menggunakan Bag-of-Words dan SVM
+    
+    st.subheader("Skenario 1: Menggunakan TF-IDF dan Naive Bayes.")
+    # Naive Bayes
+    nb = MultinomialNB()
+    nb.fit(X_train_tfidf, y_train)
+    y_pred_nb_tfidf = nb.predict(X_test_tfidf)
+    # Evaluasi
+    print("Skenario 1: TF-IDF + Naive Bayes")
+    print(classification_report(y_test, y_pred_nb_tfidf, target_names=le.classes_))
+    
+    st.subheader("Skenario 2: Menggunakan TF-IDF dan SVM")
+    # Naive Bayes
+    nb = MultinomialNB()
+    nb.fit(X_train_tfidf, y_train)
+    y_pred_nb_tfidf = nb.predict(X_test_tfidf)
+    # Evaluasi
+    print("Skenario 1: TF-IDF + Naive Bayes")
+    print(classification_report(y_test, y_pred_nb_tfidf, target_names=le.classes_))
+
+    # Hasil evaluasi SVM
+    report_svm = classification_report(y_test, y_pred_svm, target_names=['negatif', 'positif'], output_dict=True)
+    df_svm = pd.DataFrame(report_svm).transpose()
+
+    st.subheader("Evaluasi SVM")
+    st.dataframe(df_svm)
+    
 # **5. Evaluasi Model**
 with st.expander("Evaluasi Model"):
     # Hasil evaluasi Naive Bayes
