@@ -118,6 +118,14 @@ with st.expander("Evaluasi Algoritma"):
     st.subheader("Evaluasi SVM")
     st.dataframe(df_svm)
 
+st.markdown("""
+    **Output:**
+    1. Skenario 1: TF-IDF + Naive Bayes → Akurasi dan evaluasi performa ditampilkan.
+    2. Skenario 2: TF-IDF + SVM → Akurasi dan evaluasi performa ditampilkan.
+    3. Skenario 3: Bag-of-Words + Naive Bayes → Akurasi dan evaluasi performa ditampilkan.
+    4. Skenario 4: Bag-of-Words + SVM → Akurasi dan evaluasi performa ditampilkan.
+    """)
+
 # **5. Skenario Eksperimen**
 with st.expander("Skenario Eksperimen"):
     # 4 Skenario
