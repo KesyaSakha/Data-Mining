@@ -211,6 +211,23 @@ with st.expander("Visualisasi Data"):
     plt.title('Confusion Matrix - SVM')
     st.pyplot(plt)
 
+    st.markdown("""
+        **Confusion Matrix - Naive Bayes:**
+        - True Negatives (TN): 97 ulasan negatif terklasifikasi dengan benar.
+        - True Positives (TP): 64 ulasan positif terklasifikasi dengan benar.
+        - False Positives (FP): 12 ulasan negatif salah diklasifikasikan sebagai positif.
+        - False Negatives (FN): 27 ulasan positif salah diklasifikasikan sebagai negatif.
+
+        **Confusion Matrix - SVM:**
+        - True Negatives (TN): 92 ulasan negatif terklasifikasi dengan benar.
+        - True Positives (TP): 65 ulasan positif terklasifikasi dengan benar.
+        - False Positives (FP): 17 ulasan negatif salah diklasifikasikan sebagai positif.
+        - False Negatives (FN): 26 ulasan positif salah diklasifikasikan sebagai negatif.
+        
+        **Perbandingan Naive Bayes vs SVM:**
+        Naive Bayes memiliki jumlah True Negatives (97) yang lebih tinggi dibandingkan SVM (92), menunjukkan kemampuan lebih baik dalam mendeteksi ulasan negatif. SVM sedikit lebih unggul dalam mendeteksi ulasan positif dengan jumlah True Positives (65) dibandingkan Naive Bayes (64). False Positives dan False Negatives dari Naive Bayes lebih rendah pada ulasan negatif, tetapi SVM menunjukkan keseimbangan antara positif dan negatif.
+        """)
+
     st.subheader("Perbandingan Akurasi Model")
 
     metrics = ['Precision', 'Recall', 'F1-Score']
@@ -232,6 +249,7 @@ with st.expander("Visualisasi Data"):
     ax.legend()
 
     st.pyplot(fig)
+    
 
 
 # Visualisasi perbandingan hasil
