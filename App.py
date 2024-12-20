@@ -118,13 +118,13 @@ with st.expander("Evaluasi Algoritma"):
     st.subheader("Evaluasi SVM")
     st.dataframe(df_svm)
 
-st.markdown("""
-    **Output:**
-    1. Skenario 1: TF-IDF + Naive Bayes → Akurasi dan evaluasi performa ditampilkan.
-    2. Skenario 2: TF-IDF + SVM → Akurasi dan evaluasi performa ditampilkan.
-    3. Skenario 3: Bag-of-Words + Naive Bayes → Akurasi dan evaluasi performa ditampilkan.
-    4. Skenario 4: Bag-of-Words + SVM → Akurasi dan evaluasi performa ditampilkan.
-    """)
+    st.markdown("""
+        **Output:**
+        1. Skenario 1: TF-IDF + Naive Bayes → Akurasi dan evaluasi performa ditampilkan.
+        2. Skenario 2: TF-IDF + SVM → Akurasi dan evaluasi performa ditampilkan.
+        3. Skenario 3: Bag-of-Words + Naive Bayes → Akurasi dan evaluasi performa ditampilkan.
+        4. Skenario 4: Bag-of-Words + SVM → Akurasi dan evaluasi performa ditampilkan.
+        """)
 
 # **5. Skenario Eksperimen**
 with st.expander("Skenario Eksperimen"):
@@ -278,26 +278,24 @@ with st.expander("Visualisasi Data"):
     ax.legend()
 
     st.pyplot(fig)
-st.markdown("""
-    **Perbandingan Visualisasi Performa Model:**
-    1. X-Axis (Sumbu X): Menunjukkan metrik evaluasi:
-    - Precision: Keakuratan prediksi positif.
-    - Recall: Kemampuan mendeteksi ulasan positif.
-    - F1-Score: Kombinasi dari Precision dan Recall.
-    2. Y-Axis (Sumbu Y): Menunjukkan nilai skor (0.0 - 1.0).
-    3. Bar Chart:
-    - Setiap skenario direpresentasikan oleh satu bar pada setiap metrik.
-    - Warna atau posisi bar sesuai dengan skenario (Skenario 1, Skenario 2, dst.).
-    4. Interpretasi:
-    - Bandingkan tinggi bar pada setiap metrik untuk melihat performa model.
-    - Model terbaik memiliki bar paling tinggi pada Precision, Recall, dan F1-Score.
-    """)
-
-st.markdown("""
-    **Output:**
-    1. Skenario 1: TF-IDF + Naive Bayes → Akurasi dan evaluasi performa ditampilkan.
-    2. Skenario 2: TF-IDF + SVM → Akurasi dan evaluasi performa ditampilkan.
-    3. Skenario 3: Bag-of-Words + Naive Bayes → Akurasi dan evaluasi performa ditampilkan.
-    4. Skenario 4: Bag-of-Words + SVM → Akurasi dan evaluasi performa ditampilkan.
-    """)
+    st.markdown("""
+        **Perbandingan Visualisasi Performa Model:**
+        1. X-Axis (Sumbu X): Menunjukkan metrik evaluasi:
+        - Precision: Keakuratan prediksi positif.
+        - Recall: Kemampuan mendeteksi ulasan positif.
+        - F1-Score: Kombinasi dari Precision dan Recall.
+        2. Y-Axis (Sumbu Y): Menunjukkan nilai skor (0.0 - 1.0).
+        3. Bar Chart:
+        - Setiap skenario direpresentasikan oleh satu bar pada setiap metrik.
+        - Warna atau posisi bar sesuai dengan skenario (Skenario 1, Skenario 2, dst.).
+        4. Interpretasi:
+        - Bandingkan tinggi bar pada setiap metrik untuk melihat performa model.
+        - Model terbaik memiliki bar paling tinggi pada Precision, Recall, dan F1-Score.
+        """)
+    
+    st.markdown("""
+        **Kesimpulan:**
+        1. TF-IDF dengan SVM (Skenario 2) menunjukkan performa terbaik secara keseluruhan karena Precision, Recall, dan F1-Score lebih tinggi atau stabil dibandingkan skenario lainnya.
+        2. Bag-of-Words cenderung lebih rendah performanya dibandingkan TF-IDF, karena tidak memperhatikan bobot kata-kata unik.
+        """)
 # st.write("Selesai.")
