@@ -164,8 +164,46 @@ with st.expander("Skenario Eksperimen"):
     df_svm_bow = pd.DataFrame(report_svm_bow).transpose()
     st.write("Hasil Evaluasi:")
     st.dataframe(df_svm_bow)
+    
+# **6. Visualisasi Data**
+with st.expander("Visualisasi Data"):
+    st.subheader("Confusion Matrix")
 
-# hasil
+    cm_nb = confusion_matrix(y_test, y_pred_nb)
+    disp_nb = ConfusionMatrixDisplay(confusion_matrix=cm_nb, display_labels=['Negatif', 'Positif'])
+    disp_nb.plot(cmap='Blues')
+    plt.title('Confusion Matrix - Naive Bayes')
+    st.pyplot(plt)
+
+    cm_svm = confusion_matrix(y_test, y_pred_svm)
+    disp_svm = ConfusionMatrixDisplay(confusion_matrix=cm_svm, display_labels=['Negatif', 'Positif'])
+    disp_svm.plot(cmap='Blues')
+    plt.title('Confusion Matrix - SVM')
+    st.pyplot(plt)
+
+    st.subheader("Perbandingan Akurasi Model")
+
+    metrics = ['Precision', 'Recall', 'F1-Score']
+    nb_scores = [df_nb.loc['positif', 'precision'], df_nb.loc['positif', 'recall'], df_nb.loc['positif', 'f1-score']]  # Ambil nilai dari DataFrame
+    svm_scores = [df_svm.loc['positif', 'precision'], df_svm.loc['positif', 'recall'], df_svm.loc['positif', 'f1-score']]  # Ambil nilai dari DataFrame
+
+    x = np.arange(len(metrics))
+    width = 0.35
+
+    fig, ax = plt.subplots()
+    rects1 = ax.bar(x - width / 2, nb_scores, width, label='Naive Bayes')
+    rects2 = ax.bar(x + width / 2, svm_scores, width, label='SVM')
+
+    ax.set_xlabel('Metrics')
+    ax.set_ylabel('Scores')
+    ax.set_title('Perbandingan Performa Model')
+    ax.set_xticks(x)
+    ax.set_xticklabels(metrics)
+    ax.legend()
+
+    st.pyplot(fig)
+
+
 # Visualisasi perbandingan hasil
     st.subheader("Perbandingan Performa Model")
     metrics = ['Precision', 'Recall', 'F1-Score']
@@ -211,41 +249,4 @@ with st.expander("Skenario Eksperimen"):
 
     st.pyplot(fig)
 
-# **6. Visualisasi Data**
-with st.expander("Visualisasi Data"):
-    st.subheader("Confusion Matrix")
-
-    cm_nb = confusion_matrix(y_test, y_pred_nb)
-    disp_nb = ConfusionMatrixDisplay(confusion_matrix=cm_nb, display_labels=['Negatif', 'Positif'])
-    disp_nb.plot(cmap='Blues')
-    plt.title('Confusion Matrix - Naive Bayes')
-    st.pyplot(plt)
-
-    cm_svm = confusion_matrix(y_test, y_pred_svm)
-    disp_svm = ConfusionMatrixDisplay(confusion_matrix=cm_svm, display_labels=['Negatif', 'Positif'])
-    disp_svm.plot(cmap='Blues')
-    plt.title('Confusion Matrix - SVM')
-    st.pyplot(plt)
-
-    st.subheader("Perbandingan Akurasi Model")
-
-    metrics = ['Precision', 'Recall', 'F1-Score']
-    nb_scores = [df_nb.loc['positif', 'precision'], df_nb.loc['positif', 'recall'], df_nb.loc['positif', 'f1-score']]  # Ambil nilai dari DataFrame
-    svm_scores = [df_svm.loc['positif', 'precision'], df_svm.loc['positif', 'recall'], df_svm.loc['positif', 'f1-score']]  # Ambil nilai dari DataFrame
-
-    x = np.arange(len(metrics))
-    width = 0.35
-
-    fig, ax = plt.subplots()
-    rects1 = ax.bar(x - width / 2, nb_scores, width, label='Naive Bayes')
-    rects2 = ax.bar(x + width / 2, svm_scores, width, label='SVM')
-
-    ax.set_xlabel('Metrics')
-    ax.set_ylabel('Scores')
-    ax.set_title('Perbandingan Performa Model')
-    ax.set_xticks(x)
-    ax.set_xticklabels(metrics)
-    ax.legend()
-
-    st.pyplot(fig)
 # st.write("Selesai.")
