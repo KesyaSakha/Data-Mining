@@ -249,8 +249,10 @@ with st.expander("Visualisasi Data"):
     ax.legend()
 
     st.pyplot(fig)
-    
-
+    st.markdown("""
+    **Alasan:**
+    Visualisasi grafik batang yang membandingkan skor kinerja antara dua model, Naive Bayes dan SVM, berdasarkan tiga metrik: Precision, Recall, dan F1-Score. Menggunakan pustaka matplotlib, kode ini membuat dua set batang (rects1 untuk Naive Bayes dan rects2 untuk SVM), dengan lebar batang yang disesuaikan agar tidak saling bertumpukan. Setiap metrik (Precision, Recall, dan F1-Score) ditempatkan di sepanjang sumbu x, sementara nilai skor untuk masing-masing model ditampilkan pada sumbu y. Grafik ini memberi gambaran visual tentang bagaimana kedua model tersebut berperforma di berbagai metrik evaluasi.
+    """)
 
 # Visualisasi perbandingan hasil
     st.subheader("Perbandingan Performa Model")
