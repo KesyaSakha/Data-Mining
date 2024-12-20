@@ -153,41 +153,6 @@ with st.expander("Skenario Eksperimen"):
     print("Skenario 4: Bag-of-Words + SVM")
     print(classification_report(y_test, y_pred_svm_bow, target_names=le.classes_))
     st.write("Berhasil.")
-
-
-
-metrics = ['Precision', 'Recall', 'F1-Score']
-    
-    skenario_scores = {
-        "TF-IDF + Naive Bayes": [df_nb_tfidf.loc['positif', 'precision'], 
-                                 df_nb_tfidf.loc['positif', 'recall'], 
-                                 df_nb_tfidf.loc['positif', 'f1-score']],
-        "TF-IDF + SVM": [df_svm_tfidf.loc['positif', 'precision'], 
-                          df_svm_tfidf.loc['positif', 'recall'], 
-                          df_svm_tfidf.loc['positif', 'f1-score']],
-        "BoW + Naive Bayes": [df_nb_bow.loc['positif', 'precision'], 
-                              df_nb_bow.loc['positif', 'recall'], 
-                              df_nb_bow.loc['positif', 'f1-score']],
-        "BoW + SVM": [df_svm_bow.loc['positif', 'precision'], 
-                      df_svm_bow.loc['positif', 'recall'], 
-                      df_svm_bow.loc['positif', 'f1-score']]
-    }
-    
-    x = np.arange(len(metrics))
-    width = 0.2
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-    for i, (skenario, scores) in enumerate(skenario_scores.items()):
-        ax.bar(x + (i - 1.5) * width, scores, width, label=skenario)
-    
-    ax.set_xlabel('Metrics')
-    ax.set_ylabel('Scores')
-    ax.set_title('Perbandingan Performa Semua Skenario')
-    ax.set_xticks(x)
-    ax.set_xticklabels(metrics)
-    ax.legend()
-
-    st.pyplot(fig)
     
 # **5. Evaluasi Model**
 with st.expander("Evaluasi Model"):
