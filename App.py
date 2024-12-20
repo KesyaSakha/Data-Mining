@@ -102,7 +102,23 @@ with st.expander("Feature Extraction dan Algoritma"):
     print("Evaluasi SVM:")
     print(classification_report(y_test, y_pred_svm, target_names=le.classes_))
 
-# **4. Skenario Eksperimen**
+# **4. Evaluasi Algoritma**
+with st.expander("Evaluasi Algoritma"):
+    # Hasil evaluasi Naive Bayes
+    report_nb = classification_report(y_test, y_pred_nb, target_names=['negatif', 'positif'], output_dict=True)
+    df_nb = pd.DataFrame(report_nb).transpose()
+
+    st.subheader("Evaluasi Naive Bayes")
+    st.dataframe(df_nb)
+
+    # Hasil evaluasi SVM
+    report_svm = classification_report(y_test, y_pred_svm, target_names=['negatif', 'positif'], output_dict=True)
+    df_svm = pd.DataFrame(report_svm).transpose()
+
+    st.subheader("Evaluasi SVM")
+    st.dataframe(df_svm)
+
+# **5. Skenario Eksperimen**
 with st.expander("Skenario Eksperimen"):
     # 4 Skenario
     # Skenario 1: TF-IDF dan Naive Bayes
@@ -194,22 +210,6 @@ with st.expander("Skenario Eksperimen"):
     ax.legend()
 
     st.pyplot(fig)
-    
-# **5. Evaluasi Model**
-with st.expander("Evaluasi Model"):
-    # Hasil evaluasi Naive Bayes
-    report_nb = classification_report(y_test, y_pred_nb, target_names=['negatif', 'positif'], output_dict=True)
-    df_nb = pd.DataFrame(report_nb).transpose()
-
-    st.subheader("Evaluasi Naive Bayes")
-    st.dataframe(df_nb)
-
-    # Hasil evaluasi SVM
-    report_svm = classification_report(y_test, y_pred_svm, target_names=['negatif', 'positif'], output_dict=True)
-    df_svm = pd.DataFrame(report_svm).transpose()
-
-    st.subheader("Evaluasi SVM")
-    st.dataframe(df_svm)
 
 # **6. Visualisasi Data**
 with st.expander("Visualisasi Data"):
