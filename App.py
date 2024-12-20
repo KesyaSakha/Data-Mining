@@ -128,6 +128,7 @@ with st.expander("Skenario Eksperimen"):
     # Evaluasi
     print("Skenario 2: TF-IDF + SVM")
     print(classification_report(y_test, y_pred_svm_tfidf, target_names=le.classes_))
+    st.write("Berhasil.")
 
     st.subheader("Skenario 3: Menggunakan Bag-of-Words dan Naive Bayes")
     # Bag-of-Words
@@ -141,6 +142,7 @@ with st.expander("Skenario Eksperimen"):
     # Evaluasi
     print("Skenario 3: Bag-of-Words + Naive Bayes")
     print(classification_report(y_test, y_pred_nb_bow, target_names=le.classes_))
+    st.write("Berhasil.")
 
     st.subheader("Skenario 4: Menggunakan Bag-of-Words dan SVM")
      # SVM
@@ -150,6 +152,7 @@ with st.expander("Skenario Eksperimen"):
     # Evaluasi
     print("Skenario 4: Bag-of-Words + SVM")
     print(classification_report(y_test, y_pred_svm_bow, target_names=le.classes_))
+    st.write("Berhasil.")
     
 # **5. Evaluasi Model**
 with st.expander("Evaluasi Model"):
