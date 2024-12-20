@@ -134,6 +134,12 @@ with st.expander("Skenario Eksperimen"):
     df_nb_tfidf = pd.DataFrame(report_nb_tfidf).transpose()
     st.write("Hasil Evaluasi:")
     st.dataframe(df_nb_tfidf)
+    st.markdown("""
+    **Alasan:**
+    - TF-IDF menangkap bobot penting kata-kata unik dalam ulasan.
+    - Naive Bayes bekerja dengan baik untuk data teks dan menghasilkan hasil yang cepat.
+    - Namun, Precision sedikit lebih rendah dibandingkan SVM karena asumsi independensi fitur.
+    """)
 
     st.subheader("Skenario 2: Menggunakan TF-IDF dan SVM")
     svm = SVC(kernel='linear')
@@ -143,6 +149,12 @@ with st.expander("Skenario Eksperimen"):
     df_svm_tfidf = pd.DataFrame(report_svm_tfidf).transpose()
     st.write("Hasil Evaluasi:")
     st.dataframe(df_svm_tfidf)
+    st.markdown("""
+    **Alasan:**
+    - SVM dengan kernel linear cocok untuk data yang terpisah secara linear.
+    - TF-IDF membantu mengurangi noise dari kata-kata umum sehingga performa SVM meningkat.
+    - SVM menghasilkan Precision lebih tinggi dibandingkan Naive Bayes karena keunggulan dalam menangani fitur teks kompleks.
+    """)
 
     st.subheader("Skenario 3: Menggunakan Bag-of-Words dan Naive Bayes")
     bow_vectorizer = CountVectorizer(max_features=500)
@@ -155,6 +167,11 @@ with st.expander("Skenario Eksperimen"):
     df_nb_bow = pd.DataFrame(report_nb_bow).transpose()
     st.write("Hasil Evaluasi:")
     st.dataframe(df_nb_bow)
+    st.markdown("""
+    **Alasan:**
+    - Bag-of-Words bekerja dengan menghitung frekuensi kata tanpa memperhatikan bobotnya.
+    - Naive Bayes cocok untuk data yang lebih sederhana, tetapi performanya lebih rendah karena informasi kontekstual dari kata diabaikan.
+    """)
 
     st.subheader("Skenario 4: Menggunakan Bag-of-Words dan SVM")
     svm_bow = SVC(kernel='linear')
@@ -164,6 +181,11 @@ with st.expander("Skenario Eksperimen"):
     df_svm_bow = pd.DataFrame(report_svm_bow).transpose()
     st.write("Hasil Evaluasi:")
     st.dataframe(df_svm_bow)
+    st.markdown("""
+    **Alasan:**
+    - SVM tetap menghasilkan hasil yang baik meskipun menggunakan Bag-of-Words.
+    - Namun, hasilnya sedikit lebih rendah dibandingkan TF-IDF karena Bag-of-Words tidak memberikan bobot pada kata penting.
+    """)
     
 # **6. Visualisasi Data**
 with st.expander("Visualisasi Data"):
